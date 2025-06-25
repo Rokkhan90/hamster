@@ -1,11 +1,12 @@
 package modul2.HamsterSim;
+
 import java.util.*;
 
 public class Hamster {
     private int x, y;
     private int hunger;
-    private List<Saetzling> backen = new ArrayList<>();
-    private Plains plains;
+    private final List<Saetzling> backen = new ArrayList<>();
+    private final Plains plains;
 
     public Hamster(int x, int y, Plains plains) {
         this.x = x;
@@ -27,31 +28,31 @@ public class Hamster {
             return;
         }
 
-        if (istWuetend()) {
-            Richtung richtung = plains.getRichtungZuNaechstemSaetzling(x, y);
-            bewege(richtung);
-        } else {
-            Richtung r = Richtung.zufaellig();
-            bewege(r);
-        }
+        Richtung richtung = istWuetend()
+                ? plains.getRichtungZuNaechstemSaetzling(x, y)
+                : Richtung.zufaellig();
+
+        bewege(richtung);
     }
 
     private void bewege(Richtung r) {
-        x += r.dx;
-        y += r.dy;
-        x = Math.max(0, Math.min(plains.getGroesse() - 1, x));
-        y = Math.max(0, Math.min(plains.getGroesse() - 1, y));
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+        int neuesX = x + r.dx;
+        int neuesY = y + r.dy;
+        if (neuesX >= 0 && neuesX < plains.getGroesse()
+                && neuesY >= 0 && neuesY < plains.getGroesse()) {
+            x = neuesX;
+            y = neuesY;
+        }
     }
 
     public boolean istWuetend() {
         return hunger > 5 && backen.isEmpty();
+    }
+
+    public int getX() { return x; }
+    public int getY() { return y; }
+
+    public String gibIcon() {
+        return istWuetend() ? "🤬" : "🐹";
     }
 }
