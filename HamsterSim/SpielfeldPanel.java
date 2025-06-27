@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+
+
 public class SpielfeldPanel extends JPanel {
     private final Plains plains;
     private final int tileSize = 64; // groesse der Tiles
@@ -39,15 +41,29 @@ public class SpielfeldPanel extends JPanel {
             }
         }
 
-        // Setzlinge zeichnen
+        // Saetzlinge zeichnen
         for (Saetzling s : plains.getSaetzlinge()) {
             g.drawImage(saetzling, s.getX() * tileSize, s.getY() * tileSize, tileSize, tileSize, null);
         }
 
-        // Hamster zeichnen (wütend oder normal)
+        // Hamster zeichnen (wuetend oder normal)
         for (Hamster h : plains.getHamsters()) {
             BufferedImage bild = h.istWuetend() ? hamsterWuetend : hamsterNormal;
             g.drawImage(bild, h.getX() * tileSize, h.getY() * tileSize, tileSize, tileSize, null);
+            int anzahl = h.getGesamtGefressen();
+            if (anzahl > 0) {
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Arial", Font.BOLD, 14));
+
+                // Text mittig über dem Hamster platzieren
+                String text = String.valueOf(anzahl);
+                int textX = h.getX() * tileSize + tileSize / 2 - 5;
+                int textY = h.getY() * tileSize - 4;
+
+                g.drawString(text, textX, textY);
+            }
+
         }
+
     }
 }

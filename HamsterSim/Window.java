@@ -1,7 +1,7 @@
 package modul2.HamsterSim;
 
 import javax.swing.*;
-// zuständig für das externe fenster
+// zustaendig für das externe fenster
 public class Window extends JFrame {
     private SpielfeldPanel panel;
     public Window(Plains plains) {
@@ -16,7 +16,7 @@ public class Window extends JFrame {
         setVisible(true);
 
         // Timer für Ticks
-        new Timer(300, e -> {  // die geschwindigkeit mit der sich alles bewegt -> z.b. 100 = sehr schnell, 1000 = langsam usw
+        new Timer(300, e -> {  // die geschwindigkeit mit der sich alles bewegt ->  100 = sehr schnell, 1000 = langsam usw
             plains.tick();
             panel.repaint();
         }).start();

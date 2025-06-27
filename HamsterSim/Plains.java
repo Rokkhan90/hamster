@@ -50,7 +50,7 @@ public class Plains {
             h.tick();
         }
 
-        if (saetzlinge.size() < 6 && rand.nextDouble() < 0.3) {  //  geschwindigkeit der saetzlinge (spawnrate 0.3)
+        if (saetzlinge.size() < 6 && rand.nextDouble() < 0.3) {  //  geschwindigkeit der saetzlinge (spawnrate 30%)
             spawnSaetzling();                                                           // wenn weniger als 6 auf dem feld sind etc
         }
     }
